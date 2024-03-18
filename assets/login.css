@@ -1,0 +1,114 @@
+body {
+    max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-container > h2 {
+    font-family: Syne;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 36px;
+    letter-spacing: 0em;
+    width: 100px;
+    height: 36px;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.login-text {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+
+}
+
+.login-text > label {
+    font-family: Work Sans;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 16px;
+    letter-spacing: 0em;
+    color: #3D3D3D;
+}
+
+.login-text > input {
+    font-size: 18px;
+    font-weight: 600;
+    outline: none;
+    box-sizing: border-box;
+    border: 1px solid #F2F2F2;
+    width: 379px;
+    height: 51px;
+    box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+.login-text > span {
+    margin-top: 5px;
+    color: red;
+}
+
+.login-btn {
+    width: 179px;
+    height: 36px;
+    border-radius: 60px;
+    background-color: #1D6154;
+    color: #F2F2F2;
+    align-self: center;
+    margin-top: 20px;
+    font-family: Syne;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 17px;
+    letter-spacing: 0em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 100ms;
+}
+
+.login-btn:hover {
+    background-color: #1d6154d2;
+}
+
+.error-email {
+    visibility: visible;
+}
+
+.error-psw {
+    visibility: visible;
+}
+
+.no-error-email {
+    visibility: hidden;
+}
+
+.no-error-psw {
+    visibility: hidden;
+}
+
+.utilisateur-inconnu {
+    visibility: visible;
+    margin-top: 5px;
+    color: red;
+}
+
+.utilisateur-connu {
+    visibility: hidden;
+}

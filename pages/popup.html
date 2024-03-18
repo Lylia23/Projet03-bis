@@ -1,0 +1,42 @@
+<div class="popup-page">
+    <header>
+        <div class="popup-header">
+            <img id="go-back" src="./assets/icons/arrow-left.png">
+            <img id="exit" src="./assets/icons/exit.png">
+        </div>
+    </header>
+    <div class="popup-container">
+        <div class="titre-container">
+            <span id="popup-titre" class="titre">Galerie photo</span>
+        </div>
+        <div id="galerie-content" class="popup-galerie"></div>
+        <div id="formulaire-content" class="hide-content">
+            <div class="chargement-fichier">
+                <img id="image-to-send" src="./assets/icons/picture-svgrepo-com.png" />
+                <label for="photo-formulaire" class="chargement-fichier-label">
+                    <span>+ Ajouter photo</span>
+                </label>
+                <input id="photo-formulaire" type="file">
+                <span id="file-condition">jpg, png: 4mo max</span>
+            </div>
+            <div class="titre-formulaire">
+                <label for="titre-formulaire">Titre</label>
+                <input type="text" value="" id="titre-formulaire">
+            </div>
+            <div class="categorie-formulaire">
+                <label for="categorie-formulaire">Catégorie</label>
+                <select id="categorie-formulaire" value="1">
+                  <option value="1">Objets</option>
+                  <option value="2">Appartements</option>
+                  <option value="3">Hotels & restaurants</option>
+                </select>
+            </div>
+            
+        </div>
+        <div class="btn-container">
+            <div class="btn">
+                <span>Ajouter une photo</span>
+            </div>
+        </div>
+    </div>
+</div>
