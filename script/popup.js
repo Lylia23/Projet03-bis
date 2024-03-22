@@ -14,6 +14,7 @@ function goBack() {
     document.querySelector('.btn-container .btn span').innerHTML = "Ajouter une photo";
     document.getElementById('go-back').style.visibility = "hidden";
     document.getElementById('popup-titre').innerHTML = "Galerie photo";
+    document.querySelector('.btn-container .btn').classList.remove("btn-not-valid");
 }
 
 function addEventListenerToPopupBtns() {
@@ -22,54 +23,12 @@ function addEventListenerToPopupBtns() {
     document.getElementById('go-back').style.visibility = "hidden";
 }
 
-function remplirPopupGalerie() {
-    document.getElementById('galerie-content').innerHTML = "";
-
-    fetch(urlHost + '/works', {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + retreiveToken()
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        for(let i = 0; i < data.length; i++) {
-            let figure = data[i];
-            let figureHtml = `<div class="popup-galerie-image">
-                                <div>
-                                    <img class="trash" id="trash-${figure.id}" src="./assets/icons/trash.png">
-                                </div>
-                                <img class="popup-figure" src="${figure.imageUrl}" alt="${figure.title}">
-                            </div>`;
-            document.getElementById('galerie-content').innerHTML += figureHtml;
-        }
-        addEventListenerToTrash(data);
-        addEventListenerToBtnAjout();
-    })
-    .catch(error => console.error('There was a problem with the fetch operation:', error)); 
-}
-
 function addEventListenerToTrash(data) {
-    for(let i = 0; i < data.length; i++) {
-        let figure = data[i];
+    for(let figure of data) {
         document.getElementById(`trash-${figure.id}`).addEventListener('click', ()=> {
             deleteWorks(figure.id);
         });
     }
-}
-
-function deleteWorks (workId) {
-    fetch(urlHost + '/works/' + workId, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': 'Bearer ' + retreiveToken()
-        }
-    })
-    .then()
-    .catch(error => console.error('There was a problem with the fetch operation:', error)); 
-    remplirPopupGalerie();
-    const filter = retreiveSavedFilter();
-    getWorks(filter);
 }
 
 function retreiveSavedFilter() {
@@ -92,7 +51,7 @@ function switchContent() {
     document.getElementById('formulaire-content').className ="popup-ajout-projet";
     document.getElementById('go-back').style.visibility = "visible";
     document.querySelector('.btn-container .btn span').innerHTML = "Valider";
-    document.querySelector('.btn-container .btn').classList.add("btn-not-valid");
+    addWorkAbility();
     document.getElementById('popup-titre').innerHTML = "Ajout photo";
     addEventListenerToImageUploaderAndInputText();
 }
@@ -105,35 +64,8 @@ function saveWork() {
     remplirPopupGalerie();
     const filter = retreiveSavedFilter();
     getWorks(filter);
+    deletePopup();
 }  
-
-function createWorks(image, title, category) {
-    const formData = new FormData();
-
-    formData.append('image', image);
-    formData.append('title', title);
-    formData.append('category', category);
-
-    fetch(urlHost + '/works', {
-        method: 'POST',
-        headers: {
-            'Authorization': 'Bearer ' + retreiveToken()
-        },
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-        });
-}
 
 function chargerImage(inputFile) {
 
@@ -154,12 +86,7 @@ function chargerImage(inputFile) {
         }
     }
 
-    if (validateTextAndPhoto()) {
-        document.querySelector('.btn-container .btn').classList.remove("btn-not-valid");
-    } else {
-        document.querySelector('.btn-container .btn').classList.add("btn-not-valid");
-    }
-    
+    addWorkAbility();
 }
 
 function addEventListenerToImageUploaderAndInputText() {
@@ -173,6 +100,10 @@ function addEventListenerToImageUploaderAndInputText() {
 }
 
 function validateTextInInput() {
+    addWorkAbility();
+}
+
+function addWorkAbility() {
     if (validateTextAndPhoto()) {
         document.querySelector('.btn-container .btn').classList.remove("btn-not-valid");
     } else {

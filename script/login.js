@@ -1,4 +1,5 @@
 const urlHost = 'http://localhost:5678/api';
+
 addEventListenerToBtnConnexion();
 
 function addEventListenerToBtnConnexion() {
@@ -29,7 +30,7 @@ function login(emailParam, passwordParam) {
             })
             .then(data => {
                 enregistrerToken(data.token);
-                window.location.href = window.location.origin + '/FrontEnd/index.html';
+                window.location.href = window.location.origin + '/index.html';
             })
             .catch(error => console.error('There was a problem with the fetch operation:', error));
     };
